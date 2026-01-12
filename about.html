@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nosotros | Enciclopedia de Animales Mexicanos</title>
+    <meta name="description" content="Conoce el equipo y la misión de la Enciclopedia de Animales Mexicanos.">
+
+    <!-- Estilos base -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+
+    <!-- Favicons / navegador -->
+    <link rel="icon" type="image/png" href="images/Logo EAM.png"><!-- CAMBIA si tu archivo es logo-eam.png -->
+    <link rel="apple-touch-icon" href="images/Logo EAM.png"><!-- idem -->
+
+    <style>
+      /* === ESTILO EDITORIAL DE LA ENCICLOPEDIA === */
+
+.enc-container{
+  max-width:900px;
+  margin:2rem auto;
+  padding:1rem 1.5rem;
+  font-family: "Inter", sans-serif;
+  color:var(--ink);
+}
+
+/* Secciones */
+.enc-block{
+  background:#ffffff;
+  border:1px solid var(--line);
+  border-left:8px solid var(--accent);
+  padding:2rem;
+  margin-bottom:2.5rem;
+  border-radius:0.6rem;
+  box-shadow:0 2px 4px rgba(0,0,0,0.04);
+  transition:0.3s;
+}
+
+.enc-block:hover{
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Títulos */
+.enc-block h2{
+  font-size:1.8rem;
+  font-weight:800;
+  margin-bottom:1rem;
+  color:var(--accent);
+  letter-spacing:-0.5px;
+}
+
+/* Subtítulos */
+.enc-block h3{
+  font-size:1.3rem;
+  font-weight:700;
+  margin-top:1.8rem;
+  margin-bottom:0.8rem;
+  color:#b2358d; /* complementario del verde */
+}
+
+/* Párrafos y listas */
+.enc-block p,
+.enc-block li{
+  line-height:1.7;
+  margin-bottom:0.7rem;
+  color:var(--ink);
+}
+
+.enc-block ul{
+  margin-left:1.2rem;
+  padding-left:1.2rem;
+  border-left:3px solid #e3a72f; /* complementario del azul marino */
+}
+
+/* Bloques de citas */
+.enc-quote{
+  background:#f5f5f4;
+  padding:1.2rem 1.5rem;
+  border-left:6px solid #b2358d;
+  margin:1.4rem 0;
+  font-style:italic;
+  color:var(--muted);
+  border-radius:0.4rem;
+}
+
+/* Divider elegante opcional */
+.enc-divider{
+  margin:2rem 0;
+  border-top:1px dashed var(--line);
+  opacity:0.7;
+}
+      /* === ESTILO ADICIONAL PÁGINA NOSOTROS === */
+      :root{--line:#e5e7eb;--accent:#16a34a;--ink:#0f172a;--muted:#6b7280}
+      body{color:var(--ink)}
+      .site-header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,#fff,#f9fbff);border-bottom:1px solid var(--line)}
+      .mast{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem 0}
+      .brand{display:flex;align-items:center;gap:.75rem}
+      .brand img{width:44px;height:44px;object-fit:contain;border-radius:12px}
+      .brand .title{font-weight:700}
+      .brand .sub{color:var(--muted);font-size:.9rem}
+      .nav{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+      .nav a{padding:.5rem .75rem;border-radius:10px;color:#0f172a;text-decoration:none}
+      .nav a[aria-current="page"], .nav a:hover{background:#ecfdf5;color:var(--accent)}
+
+      .about-card{background:#fff;border-radius:12px;box-shadow:0 6px 16px rgba(0,0,0,.06);padding:18px;height:100%}
+      .about-card h3{font-size:1.15rem;margin:.4rem 0}
+      .titlepage h2{margin-bottom:.5rem}
+      .titlepage p{color:#555;margin-bottom:1.25rem}
+    </style>
+  </head>
+  <body class="main-layout in_page">
+    <!-- loader (no bloquea si falta la imagen) -->
+    <div class="loader_bg"><div class="loader"><img src="images/loading.gif" alt="Cargando" onerror="this.parentNode.parentNode.style.display='none'"></div></div>
+
+    <!-- Header unificado -->
+    <header id="siteHeader" class="site-header" role="banner">
+      <div class="container">
+        <div class="mast">
+          <div class="brand">
+            <a href="index.html" aria-label="Ir al inicio">
+              <img src="images/Logo EAM.png" alt="Enciclopedia de Animales Mexicanos — logotipo" loading="eager" decoding="async" fetchpriority="high"><!-- CAMBIA si tu archivo es logo-eam.png -->
+            </a>
+            <div>
+              <div class="title">Enciclopedia de Animales Mexicanos</div>
+              <div class="sub">Nosotros</div>
+            </div>
+          </div>
+          <nav class="nav" aria-label="Navegación principal">
+            <a href="index.html">Inicio</a>
+            <a href="about.html" aria-current="page" class="active">Nosotros</a>
+            <a href="contact.html">Contacto</a>
+            <a href="humanidad-animalidad.html">Animalidad y Humanidad</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Nosotros -->
+    <section class="service">
+      <div class="container">
+        <div class="row"><div class="col-md-12">
+          <div class="titlepage">
+            <h2>¿Quiénes <span class="green">somos?</span></h2>
+            <p>Somos un equipo interdisciplinario dedicado a documentar, investigar y difundir la fauna de México con estándares verificables.</p>
+          </div>
+        </div></div>
+
+
+  <!-- OBJETIVOS GENERALES -->
+  <div class="enc-block">
+    <h2>Objetivos generales</h2>
+    <ul>
+      <li>Construir un recurso de divulgación, formación y reflexión científica en torno a la condición humana en su entorno animal.</li>
+      <li>Conformar un instrumento de consulta enciclopédica sobre especies endémicas de México, para un público amplio y no necesariamente especializado.</li>
+      <li>Establecer focos de discusión científico-humanística sobre la relación humanidad-animalidad.</li>
+    </ul>
+  </div>
+
+  <!-- OBJETIVOS ESPECÍFICOS -->
+  <div class="enc-block">
+    <h2>Objetivos específicos</h2>
+    <ul>
+      <li>Desarrollar un trabajo de colaboración interdisciplinar en torno a un ejercicio formativo de comunidades científicas.</li>
+      <li>Generar recursos de investigación y formación disciplinar en áreas especializadas.</li>
+      <li>Formar recursos humanos en herramientas de divulgación y comunicación del conocimiento científico.</li>
+    </ul>
+  </div>
+
+  <!-- METODOLOGÍA -->
+  <div class="enc-block">
+    <h2>Metodología</h2>
+    <p>Se comprende aquí en dos niveles, el que corresponde a la gestión de la información y la base documental amplia que requerirá el proyecto, y, por otro lado, la propia de cada una de las disciplinas convocadas a colaborar. La intención de cada entrada se centra en temas delimitados y preguntas relativas a los problemas contemporáneos (éticos, sociales, jurídicos) que presenta la relación humanidad / animalidad.</p>
+    <p>LGyAC</p>
+  </div>
+
+  <!-- MARCO CRÍTICO -->
+  <div class="enc-block">
+    <h2>Marco Crítico</h2>
+
+    <h3>Plan Nacional de Desarrollo (2018-2024)</h3>
+    <div class="enc-quote">
+      “La sostenibilidad se define como la satisfacción de las necesidades presentes sin comprometer la capacidad de las generaciones futuras para satisfacer sus propias necesidades. Esta fórmula resume insoslayables mandatos éticos, sociales, ambientales y económicos que deben ser aplicados en el presente para garantizar un futuro mínimamente habitable y armónico, que se guiará por una idea de desarrollo que subsane las injusticias sociales e impulse el desarrollo económico sin provocar afectaciones a la convivencia pacífica, a los lazos de solidaridad, a la diversidad cultural del entorno.”
+    </div>
+
+    <h3>Programa de las Naciones Unidas para el Medio Ambiente (Área 2)</h3>
+    <div class="enc-quote">
+      “Producir un cambio transformativo para la naturaleza y las personas”; en su deriva operativa, el objetivo 15, de los 17 ODS instaurados por UNESCO, establece una línea específica de trabajo que “Se centrará en desarrollar la voluntad y la capacidad políticas para restaurar la relación de los seres humanos con la naturaleza.”
+    </div>
+  </div>
+
+  <div class="enc-divider"></div>
+
+  <!-- POLÍTICA EDITORIAL -->
+  <div class="enc-block">
+    <h2>EAM. Política editorial</h2>
+
+    <h3>Código ético</h3>
+    <p>La Enciclopedia de los Animales Mexicanos es un instrumento pedagógico formativo que tiene como objetivo primordial la promoción y divulgación del conocimiento científico-antropológico sobre la biodiversidad mexicana. Cualquier científico que labore en áreas de humanidades, ciencias sociales o ciencias de la vida puede colaborar con la EAM, publicación permanentemente abierta a contribuciones tanto nacionales como internacionales.</p>
+    <p>La Enciclopedia de los Animales Mexicanos invita a sus autores, editores y revisores a leer los códigos éticos específicos a cada función editorial de las implicadas en la construcción colectiva de este instrumento.</p>
+
+    <!-- AUTORES -->
+    <h3>Responsabilidades de los autores</h3>
+    <p>Los textos presentados la Enciclopedia de los Animales Mexicanos, deben ser fruto de una investigación original e inédita por parte del autor. Los datos e información contenidos en el manuscrito deben haber sido obtenidos de manera ética, por lo tanto, se espera que los autores asuman la responsabilidad total de la información expuesta en las entradas enciclopédicas propuestas.</p>
+    <p>Los autores deben abstenerse de involucrarse en faltas de conducta científicas e infringir la ética de publicación. Deben presentar sus resultados con claridad, sin falsificación y con honestidad.</p>
+    <p>Con el envío los autores asumen que su investigación no ha sido publicada antes y que no está siendo evaluada por otra revista y en caso de que se quiera anular la publicación de su trabajo, debe notificarse con tiempo a la editorial de la revista.</p>
+    <p>El plagio es una falta de ética científica, por lo tanto, será inadmisible cualquier elemento que.</p>
+    <p>Los autores deben evitar tergiversar a los autores citados, manipular o distorsionar la información. Deben proporcionar autoría y reconocimientos apropiados, por lo tanto, cualquier persona que haya contribuido en la investigación, debe ser reconocida como coautor y las citas obtenidas de otros textos, deben ser legibles y correctas.</p>
+    <p>En caso de que la entrada propuesta esté realizada por mas de un autor, los implicados deben otorgar su consentimiento para la publicación de la misma.</p>
+    <p>Se debe notificar al editor cuando se tenga algún conflicto de intereses directo o indirecto con los del equipo la dirección editorial de la EAM, autores o árbitros.</p>
+    <p>Los autores están obligados a participar en el proceso de revisión por pares para todos los materiales enviados.</p>
+
+    <!-- EDITORES -->
+    <h3>Responsabilidades de los editores</h3>
+    <p>El consejo editorial deberá esforzarse para satisfacer las necesidades de los autores y los lectores, para mejorar constantemente la revista y asegurar la calidad de los materiales publicados, deben trabajar en impulsar las normas académicas y científicas del la EAM.</p>
+    <p>El comité editorial publicará las normas del proceso de revisión por pares con la finalidad de que los autores conozcan los criterios de evaluación. El comité editorial estará siempre dispuesto a justificar por escrito cualquier controversia surgida en el proceso de evaluación.</p>
+    <p>La decisión de los editores al rechazar o aceptar un artículo debe estar basada únicamente en la investigación y su contenido, esto, en relación a la claridad, la originalidad y rigurosidad de las entradas propuestas.</p>
+    <p>Los investigadors que componen la dirección editorial de la EAM deben guardar completa confidencialidad sobre los textos recibidos y su contenido, hasta que hayan sido aceptados para su publicación, o bien, rechazados bajo estrictos criterios de dictaminación. No se revelará a los dictaminadores la identidad de los autores, ni la identidad de los dictaminadores a los autores.</p>
+    <p>Ningún miembro del consejo editorial debe utilizar información de cualquier investigación recibida, salvo cuando el autor haya dado su consentimiento.</p>
+    <p>Los editores que toman decisiones finales de rechazo o aceptación de las investigaciones, deben retirarse de las decisiones editoriales si se tiene conflicto de interés en relación a los artículos en consideración, y la ponderación final la tomará otro editor imparcial.</p>
+    <p>Los editores serán responsables de informar a los autores sobre la fase en la que se encuentra la gestión editorial de su investigación dentro de la EAM, así como las resoluciones y dictámenes de la misma.</p>
+    <p>El editor en jefe de la revista tiene la ultima palabra sobre la publicación o el rechazo que cada investigación que es inviada a la EAM. Es su deber respetar a todas las personas que forman parte de esta publicación, tanto a revisores como a autores, recae en él la responsabilidad de llamar la atención a los revisores y a otros editores cuando se están infringiendo las normas establecidas o no se están respetado los derechos de cada participante.</p>
+
+    <!-- REVISORES -->
+    <h3>Responsabilidades de los revisores</h3>
+    <p>Todos los revisores deben conocer la política editorial y la declaración ética y mala práctica de la EAM.</p>
+    <p>Los revisores deben notificar al editor cualquier conducta no ética por parte de los autores y otorgar toda la información posible para rechazar una investigación. Deberán de comprometerse a mantener la confidencialidad de cada trabajo recibido.</p>
+    <p>El revisor debe tratar cualquier manuscrito recibido para dictamen como un documento confidencial. El contenido puede discutirse con otros especialistas sólo con la autorización explícita del comité editorial de la dirección editorial de la EAM.</p>
+    <p>Los revisores deberán tener potenciales en el ámbito de la experiencia científica o experiencia laboral significativa en un campo relevante especializado. Deben haber realizado recientemente investigaciones y / o trabajos relativos al tema en cuestión. Los revisores potenciales deben proporcionar información personal y profesional que sea precisa y que brinde una representación justa de su experiencia.</p>
+    <p>En caso de que un revisor no esté calificado para el trabajo correspondiente, deberá retirarse o declinar el proceso de revisión.</p>
+    <p>Todo revisor deberá notificar al editor en un plazo de cinco días, si está disponible para revisar la investigación.</p>
+    <p>Las recomendaciones y las observaciones hechas para el autor deberán estar fundamentadas. Cada revisor deben estar dispuestos a explicar, abundar y si así se requiere, rectificar el dictamen otorgado.</p>
+
+  </div>
+
+</div>
+
+    </section>
+<!-- ===== Dirección Editorial y Coordinaciones ===== -->
+<section class="service" id="equipo">
+  <div class="container">
+    <div class="row"><div class="col-md-12">
+      <div class="titlepage">
+        <h2>Dirección <span class="green">Editorial</span> y Coordinaciones</h2>
+        <p>Equipo responsable de la línea editorial, historia, y la gestión de información y sistemas de comunicación.</p>
+      </div>
+    </div></div>
+
+    <div class="row">
+      <!-- Dirección Editorial -->
+      <div class="col-md-6 col-lg-4">
+        <article class="about-card h-100">
+          <h3 class="mb-2">Dirección Editorial</h3>
+          <ul class="mb-0">
+            <li><strong>María José  Bernáldez Aguilar</strong> <span class="text-muted">(CA)</span></li>
+                        <li><strong>Alfredo Gracia Rosas</strong> <span class="text-muted">(CA)</span></li>
+            <li><strong>Marcela Venebra</strong> <span class="text-muted">(CA · Fenomenología, Teorías de la subjetividad)</span></li>
+          </ul>
+        </article>
+      </div>
+
+
+
+      <!-- Gestión de información y sistemas de comunicación -->
+      <div class="col-md-12 col-lg-4 mt-3 mt-lg-0">
+        <article class="about-card h-100">
+          <h3 class="mb-2">Gestión de información y sistemas de comunicación</h3>
+          <ul class="mb-0">
+            <li><strong>Dante Yael Bahena,            
+LIZETH GONZAGA ALVAREZ
+            </strong> <span class="text-muted"></span></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <!-- Adscripciones / Facultades -->
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <article class="about-card">
+          <h3 class="mb-2">Adscripciones</h3>
+          <ul class="mb-0">
+            <li><strong></strong></li>
+            <li><strong>Facultad de Humanidades</strong></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ===== Lineamientos Editoriales ===== -->
+<section class="service" id="lineamientos">
+  <div class="container">
+    <div class="row"><div class="col-md-12">
+      <div class="titlepage">
+        <h2>Lineamientos <span class="green">Editoriales</span></h2>
+        <p>Consulta el documento oficial de criterios, normas y procesos editoriales de la Enciclopedia de Animales Mexicanos.</p>
+      </div>
+    </div></div>
+
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        <article class="about-card">
+          <h3 class="mb-2">Documento PDF</h3>
+          <div class="preview mb-3" style="border:1px solid var(--line); border-radius:12px; overflow:hidden">
+            <!-- Vista previa del PDF -->
+            <embed src="LINEAMIENTOS_EDITORIALES_PARA_LA_RECEPCIÓN_DE_ARTÍCULOSEAM.pdf" type="application/pdf" width="100%" height="400px" style="border:0"/>
+          </div>
+          <div class="actions d-flex gap-2 flex-wrap">
+            <a class="btn-linklike" href="LINEAMIENTOS_EDITORIALES_PARA_LA_RECEPCIÓN_DE_ARTÍCULOSEAM.pdf" target="_blank" rel="noopener">Abrir en pestaña</a>
+            <a class="btn-linklike" href="LINEAMIENTOS_EDITORIALES_PARA_LA_RECEPCIÓN_DE_ARTÍCULOSEAM.pdf" download="Lineamientos-Editoriales.pdf">Descargar</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Footer correcto -->
+    <footer>
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 col-sm-6">
+              <ul class="social_icon">
+                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+              </ul>
+              <p class="variat pad_roght2">
+                Proyecto de difusión del conocimiento zoológico y cultural, comprometido con la preservación de la biodiversidad mexicana.
+              </p>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <h3>Contáctanos</h3>
+              <p class="variat pad_roght2">¿Dudas o colaboraciones?<br> Escríbenos: contacto@eam.org</p>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <h3>Enlaces útiles</h3>
+              <ul class="link_menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="about.html">¿Quiénes somos?</a></li>
+                <li><a href="animales.html">Especies</a></li>
+                <li><a href="lineas-investigacion.html">Líneas de investigación</a></li>
+                <li><a href="colaboradores.html">Colaboradores</a></li>
+                <li><a href="contact.html">Contacto</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <h3>Nuestra visión</h3>
+              <p class="variat">Documentar y preservar el conocimiento científico y tradicional sobre la fauna de México, de forma abierta y verificable.</p>
+            </div>
+            <div class="col-md-6 offset-md-6">
+              <form id="newsletter" class="bottom_form">
+                <input class="enter" placeholder="Tu correo electrónico" type="email" name="email" required>
+                <button class="sub_btn">Suscribirme</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-10 offset-md-1">
+                <p>© 2025 Enciclopedia de los Animales Mexicanos. Todos los derechos reservados.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JS con CDN fallback -> evita “no carga” si faltan archivos locales -->
+    <script src="js/jquery.min.js"></script>
+    <script>window.jQuery||document.write('<script src="https://code.jquery.com/jquery-3.6.0.min.js"><\\/script>')</script>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>if(typeof $.fn.modal==='undefined'){document.write('<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"><\\/script>')}</script>
+
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script>
+      // Evita que un error en custom.js rompa la página
+      try { document.write('<script src="js/custom.js"><\\/script>'); } catch(e) {}
+    </script>
+
+    <script>
+      // Header "stuck" protegido
+      (function(){
+        var h = document.getElementById('siteHeader');
+        function onScroll(){ if(!h) return; (window.scrollY>8)?h.classList.add('stuck'):h.classList.remove('stuck'); }
+        onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+        console.log('about.html listo');
+      })();
+    </script>
+  </body>
+</html>
+
+
