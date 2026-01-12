@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Enciclopedia de Animales Mexicanos</title>
+    <meta name="description" content="Proyecto dedicado a la investigación, difusión y divulgación de la fauna de México: fichas de especies, recursos educativos y colaboraciones.">
+    <meta name="author" content="Enciclopedia de Animales Mexicanos">
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+      :root{
+        --bg:#f7faf7;
+        --surface:#ffffff;
+        --ink:#0f172a;
+        --muted:#6b7280;
+        --line:#e5e7eb;
+        --accent:#16a34a;
+        --accent-600:#15803d;
+        --accent-700:#166534;
+        --radius:16px;
+        --shadow:0 10px 25px rgba(2,6,23,.08), 0 2px 8px rgba(2,6,23,.06);
+        --shadow-sm:0 6px 18px rgba(2,6,23,.08);
+        --focus:0 0 0 3px rgba(22,163,74,.2), 0 1px 2px rgba(2,6,23,.08);
+      }
+      html, body{ background:var(--bg); color:var(--ink); }
+      body{ font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif; }
+      h1,h2,h3,h4{ font-weight:700 }
+      .longform{ font-family:"Merriweather", Georgia, Cambria, "Times New Roman", Times, serif; line-height:1.7 }
+      .carousel-img {
+    display: block;
+    margin: 0 auto;
+
+    /* Ajuste automático */
+    width: auto;
+    height: auto;
+
+    /* Límite para que no sea enorme */
+    max-width: 900px;
+    max-height: 450px;
+
+    /* Evita que se deforme */
+    object-fit: contain;
+}
+      a{ color:var(--accent); text-decoration:none; transition:color .15s; }      
+      a:hover{ color:var(--accent-600); }       
+      p{ margin-bottom:1.25rem; }
+      .container{ padding-left:1rem; padding-right:1rem; }
+      /* ===== Header ===== */
+      .site-header{position:sticky; top:0; z-index:1030; background:linear-gradient(180deg,#ffffff,#f7fff9); border-bottom:1px solid var(--line)}
+      .site-header.stuck{box-shadow:var(--shadow)}
+      .site-header .container{max-width:1200px}
+      .mast{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.85rem 0}
+      .brand{display:flex; align-items:center; gap:.75rem}
+      .brand img{width:44px; height:44px; object-fit:contain; border-radius:12px}
+      .brand .title{font-weight:700; letter-spacing:.2px}
+      .brand .sub{color:var(--muted); font-size:.9rem}
+      .site-header nav.nav{display:flex; align-items:center; gap:.5rem; flex-wrap:wrap}
+      .site-header nav.nav a{padding:.5rem .75rem; border-radius:10px; color:#0f172a; text-decoration:none}
+      .site-header nav.nav a[aria-current="page"], .site-header nav.nav a:hover{background:#ecfdf5; color:var(--accent)}
+
+      /* ===== Buscador (mejorado) ===== */
+      .site-search{ padding:.35rem 0 1rem; position:relative; overflow:visible; }
+      .cv-search{ display:flex; align-items:center; gap:.6rem; background:#fff; border:1px solid var(--line); border-radius:999px; padding:.35rem .75rem; box-shadow:var(--shadow-sm); transition:box-shadow .15s, border-color .15s; width:min(620px,100%); }
+      .cv-search:focus-within{ box-shadow:var(--focus); border-color:#cce3d3; }
+      .cv-search svg{ flex:0 0 auto }
+      .cv-search input{ border:0; outline:none; width:100%; padding:.35rem; background:transparent; font-size:1rem }
+      .cv-kbd{ font-size:.75rem; color:#64748b; border:1px solid var(--line); border-radius:6px; padding:.05rem .35rem; background:#f8fafc }
+
+      .search-panel{
+        position:absolute; left:0; top:calc(100% + .4rem); width:min(720px,100%);
+        background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
+        z-index:1060; display:none; overflow:hidden;
+      }
+      .search-panel .sp-header{
+        display:flex; align-items:center; justify-content:space-between;
+        padding:.6rem .8rem; border-bottom:1px solid var(--line); background:#fcfefc;
+      }
+      .search-panel .sp-header strong{ font-weight:700; color:#0f172a; font-size:.95rem }
+      .search-panel .sp-header button{ border:0; background:transparent; font-size:1.1rem; line-height:1; cursor:pointer; color:#64748b; }
+      .search-panel .sp-list{ max-height:360px; overflow:auto; padding:.25rem }
+      .sp-item{ display:grid; grid-template-columns: 1.3rem auto; gap:.65rem; padding:.6rem .75rem; cursor:pointer; align-items:flex-start; }
+      .sp-item:hover{ background:#f7faf7 }
+      .sp-item.active{ background:#ecfdf5; }
+      .sp-ico{ width:1.2rem; text-align:center; color:#16a34a; margin-top:.15rem }
+      .sp-type{ font-size:.7rem; text-transform:uppercase; letter-spacing:.04em; color:#64748b; border:1px solid var(--line); border-radius:6px; padding:.05rem .35rem; margin-right:.5rem }
+      .sp-main{ min-width:0 }
+      .sp-title{ font-weight:600; color:#0f172a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .sp-meta{ font-size:.82rem; color:#64748b; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .sp-tags{ display:flex; gap:.35rem; flex-wrap:wrap; margin-top:.25rem }
+      .sp-chip{ border:1px solid #bbf7d0; background:#ecfdf5; color:#166534; border-radius:999px; padding:.12rem .45rem; font-size:.75rem }
+      .hl{ background: #fef9c3; border-radius:4px; padding:0 .15rem; }
+      /* ===== ESTILOS MEJORADOS PARA FICHAS EAM ===== */
+
+/* Contenedor de la rejilla */
+.pdf-grid {
+    display: grid;
+    /* Responsive automático: columnas de mínimo 300px */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 2rem; /* Más espacio entre tarjetas */
+    padding: 1.5rem 0;
+}
+
+/* La Tarjeta (Ficha) */
+.pdf-item {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.04); /* Borde casi invisible */
+    border-radius: 16px; /* Bordes más redondeados */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transición suave */
+    display: flex;
+    flex-direction: column; /* Asegura que el footer quede abajo */
+}
+
+.pdf-item:hover {
+    transform: translateY(-5px); /* Se levanta al pasar el mouse */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: var(--accent); /* Borde verde sutil al hover */
+}
+
+.pdf-item.hide {
+    display: none !important;
+}
+
+/* Área de Vista Previa (Arriba) */
+.preview {
+    position: relative;
+    background: #f1f5f9;
+    height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.pdf-embed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 0;
+}
+
+/* Etiqueta flotante "Vista previa" */
+.preview .hint {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(4px);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-700);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    pointer-events: none;
+}
+
+/* Cuerpo de la Tarjeta */
+.pdf-meta {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex-grow: 1; /* Empuja el footer hacia abajo */
+}
+
+.pdf-name {
+    font-family: "Merriweather", serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--ink);
+    line-height: 1.4;
+}
+
+/* Etiquetas (Tags) */
+.tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.badge-tag {
+    background: #ecfdf5;
+    color: var(--accent-700);
+    border: 1px solid #bbf7d0;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+/* Botones de Acción (Footer) */
+.actions {
+    margin-top: auto; /* Empuja los botones al final */
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos botones iguales */
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+}
+
+/* Botón Principal (Ver) */
+.btn-primary-action {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6rem;
+    background: var(--accent);
+    color: white !important;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+.btn-primary-action:hover {
+    background: var(--accent-600);
+    text-decoration: none;
+}
+
+/* Botón Secundario (Descargar) */
+.btn-secondary-action {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6rem;
+    background: white;
+    color: var(--muted) !important;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+.btn-secondary-action:hover {
+    border-color: var(--accent);
+    color: var(--accent) !important;
+    background: #f0fdf4;
+    text-decoration: none;
+}
+### 2. El CSS Necesario
+Agrega esto a tu `<style>` para que los controles se vean como botones modernos ("píldoras") y no como formularios antiguos.
+
+```css
+/* ===== DISEÑO MEJORADO DE TOOLBAR ===== */
+
+/* Contenedor de herramientas flex */
+.cv-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: #ffffff;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    width: fit-content; /* Se ajusta al contenido */
+    margin-left: auto; /* Empuja a la derecha en desktop */
+}
+
+@media (max-width: 991px) {
+    .cv-toolbar { margin-left: 0; width: 100%; }
+}
+
+/* Badge de contador */
+.result-badge {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    padding-right: 8px;
+    border-right: 1px solid var(--line);
+    margin-right: 4px;
+    white-space: nowrap;
+}
+
+/* Selector estilizado (sin borde por defecto) */
+.cv-select-wrapper {
+    position: relative;
+}
+
+.cv-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
+    padding-right: 1.2rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.cv-select-wrapper::after {
+    content: '\f107'; /* Icono flecha abajo */
+    font-family: 'FontAwesome';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    pointer-events: none;
+    font-size: 0.8rem;
+}
+
+/* Botón Limpiar (Icono circular) */
+.cv-btn-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: #f8fafc;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cv-btn-icon:hover {
+    background: #fee2e2; /* Rojo muy suave */
+    color: #ef4444;
+    border-color: #fca5a5;
+}
+
+/* Área de Chips */
+.cv-chips-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Estilo del Chip individual (Generado por JS) */
+.cv-chip {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #fff;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.cv-chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.cv-chip.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    box-shadow: 0 2px 6px rgba(22, 163, 74, 0.3);
+}
+
+/* ===== Ajustes base ===== */
+img { 
+    max-width: 100%; 
+    height: auto; 
+}
+
+.read_more { 
+    cursor: pointer; 
+}
+
+.gallery_img figure, 
+.about_img figure { 
+    margin: 0; 
+}
+
+.loader_bg { 
+    display: none; 
+}
+
+/* =========================================
+       CORRECCIONES MÓVILES (ANTI-DISTORSIÓN)
+       ========================================= */
+    
+    /* 1. Evitar scroll horizontal indeseado */
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+
+    /* 2. Arreglar el Carrusel (Banner) en móviles */
+    #myCarousel .carousel-item {
+        height: auto !important; /* Quita la altura forzada */
+        min-height: 250px;       /* Altura mínima para que no desaparezca */
+    }
+
+    #myCarousel .carousel-item img {
+        width: 100% !important;  /* Ajustar al ancho del contenedor */
+        height: auto !important; /* Mantener proporción */
+        max-height: 500px;       /* Límite en PC */
+        object-fit: cover;       /* Recortar si es necesario, no estirar */
+    }
+
+    /* 3. Ajustar la Cabecera de Fichas en móviles */
+    @media (max-width: 768px) {
+        .section-header-modern {
+            text-align: center; /* Centrar todo en móvil */
+        }
+
+        .titlepage {
+            text-align: center !important;
+            margin-bottom: 15px;
+        }
+
+        /* Barra de herramientas adaptable */
+        .cv-toolbar {
+            justify-content: center; /* Centrar controles */
+            width: 100%;
+            margin-left: 0;
+            padding: 10px;
+        }
+
+        /* Hacer que el select ocupe ancho completo para fácil toque */
+        .cv-select-wrapper, .cv-select {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .cv-toolbar {
+            display: grid; /* Cambiar a grid en móvil para mejor control */
+            grid-template-columns: auto 1fr auto; /* Badge - Select - Botón */
+            gap: 10px;
+        }
+    }
+
+    /* 4. Ajustar la Rejilla (Grid) para pantallas muy angostas */
+    @media (max-width: 380px) {
+        .pdf-grid {
+            /* Bajar el mínimo de 300px a 100% para celulares pequeños */
+            grid-template-columns: 1fr; 
+        }
+    }
+
+#myCarousel .carousel-item img {
+    width: 200vw;  /* ancho relativo al viewport */
+    height: 200vh;  /* altura relativa al viewport */
+    object-fit: contain;  /* mantiene proporciones */
+    display: block;
+    margin: 0 auto;
+}
+/* ==========================================
+   CARRUSEL — COMPACTO + DEGRADADO BRILLANTE
+   ========================================== */
+
+/* Fondo con degradado más luminoso e integrado */
+.banner_main,
+#myCarousel,
+.carousel-inner {
+  background: linear-gradient(
+    135deg,
+    #0a4a32 0%,
+    #0f7b4a 25%,
+    #16a34a 45%,
+    #2bcf9f 70%,
+    #86f7d1 100%
+  ) !important;
+  padding: 12px 0;
+}
+
+/* Carrusel más compacto */
+.carousel-img {
+  width: 30%;
+  height: 10vh;            /* ↓ antes 70vh */
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* Espacio reducido en captions */
+.carousel-caption {
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.45),
+    rgba(0,0,0,0.05)
+  );
+  padding-bottom: 20px;     /* ↓ antes 40px */
+  border-radius: 0 0 12px 12px;
+}
+
+/* Texto más sobrio y pequeño */
+.carousel-caption h1 {
+  font-size: 2.3rem;        /* ↓ antes 3rem */
+  font-weight: 200;
+  color: #ffffff;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.45);
+}
+
+.carousel-caption span {
+  background: rgba(0,0,0,0.35);
+  padding: 4px 10px;        /* ↓ tamaño */
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #eafff3;
+}
+
+/* Indicadores */
+.carousel-indicators li {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255,255,255,0.4);
+}
+.carousel-indicators .active {
+  background-color: white;
+  transform: scale(1.2);
+}
+
+/* Flechas refinadas */
+.carousel-control-prev:hover i,
+.carousel-control-next:hover i {
+  color: #b8ffd8;
+}
+/* Quita el espacio gigante debajo del carrusel */
+.banner_main,
+.banner,
+#myCarousel,
+.carousel-inner {
+  height:      
+
+
+
+
+      /* Convocatorias */
+      .convocatorias-section { background:#f7f9f8; padding:40px 0; border-top:1px solid #e9ecef; }
+      .titlepage .green{ color:var(--accent); }
+      .cv-tools{display:flex; align-items:center; gap:.5rem; flex-wrap:wrap}
+      .cv-select{border:1px solid var(--line); background:#fff; border-radius:10px; padding:.55rem .7rem}
+      .cv-btn{display:inline-flex; align-items:center; gap:.5rem; padding:.55rem .8rem; border-radius:10px; border:1px solid var(--line); background:#fff; cursor:pointer}
+      .cv-chips{display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem}
+      .cv-chip{display:inline-flex; align-items:center; gap:.35rem; border:1px solid #bbf7d0; background:#ecfdf5; color:var(--accent); padding:.25rem .6rem; border-radius:999px; font-size:.9rem; cursor:pointer}
+      .cv-chip.active{background:#dcfce7; border-color:#86efac}
+      .cv-empty{display:none; border:1px dashed var(--line); border-radius:12px; padding:2rem; text-align:center; color:var(--muted); background:#fff; margin-top:1rem}
+
+      .pdf-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap:1rem; padding:1.25rem 0 0; }
+      @media (max-width: 480px){ .pdf-grid{ grid-template-columns: 1fr; } }
+      .pdf-item{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; transition: transform .2s ease, box-shadow .2s ease; }
+      .pdf-item.hide{ display:none !important; }
+      .pdf-item:hover{ transform: translateY(-2px); box-shadow:0 18px 30px rgba(2,6,23,.10), 0 4px 14px rgba(2,6,23,.06); }
+      .preview{ position:relative; background:linear-gradient(180deg,#f0f7f3,#e9f7ee); min-height:220px }
+      .pdf-embed{ width:100%; height:380px; border:0; display:block; background:#f0f3f7; }
+      @media (max-width: 576px){ .pdf-embed{ height:320px; } }
+      .preview .hint{position:absolute; right:12px; bottom:12px; background:rgba(255,255,255,.85); border:1px solid var(--line); border-radius:999px; padding:.25rem .6rem; font-size:.8rem; color:#64748b}
+      .pdf-meta{ display:flex; flex-direction:column; gap:.6rem; padding:.9rem .9rem 1rem; }
+      .pdf-name{ font-weight:700; line-height:1.35; word-break:break-word }
+      .tag-row{ display:flex; flex-wrap:wrap; gap:.35rem }
+      .badge-tag{ border:1px solid #bbf7d0; background:#ecfdf5; color:var(--accent); border-radius:999px; padding:.15rem .5rem; font-size:.8rem; }
+      .actions{ display:flex; align-items:center; gap:.5rem; margin-top:.25rem }
+      .btn-linklike{ display:inline-flex; align-items:center; gap:.45rem; border:1px solid var(--line); padding:.45rem .75rem; border-radius:10px; background:#fff; text-decoration:none; color:var(--accent); font-weight:600; }
+      .btn-linklike:hover{ background:#f1fcf5; border-color:#cce3d3; }
+
+      @media (prefers-reduced-motion: reduce) { .carousel, .carousel-item{ transition:none!important } }
+      /* ===== FRANJA DE IMPACTO ===== */
+.impact-section {
+    background: var(--accent-700); /* Verde oscuro corporativo */
+    background: linear-gradient(135deg, #166534 0%, #14532d 100%);
+    padding: 60px 0;
+    margin: 40px 0; /* Separación vertical */
+    color: #ffffff;
+    border-radius: 0; /* Opcional: 16px si quieres que flote */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decoración de fondo sutil */
+.impact-section::before {
+    content: '\f1b0'; /* Icono de pata de animal fontawesome */
+    font-family: 'FontAwesome';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 15rem;
+    color: rgba(255,255,255,0.03);
+    transform: rotate(20deg);
+}
+
+.impact-box {
+    position: relative;
+    z-index: 2;
+    padding: 10px;
+}
+
+/* Líneas divisorias solo en escritorio */
+@media (min-width: 768px) {
+    .border-side {
+        border-left: 1px solid rgba(255,255,255,0.15);
+        border-right: 1px solid rgba(255,255,255,0.15);
+    }
+}
+
+.impact-icon {
+    font-size: 2rem;
+    color: #86efac; /* Verde claro brillante */
+    margin-bottom: 10px;
+    display: block;
+}
+
+.impact-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    font-family: "Inter", sans-serif;
+}
+
+.impact-text {
+    font-family: "Merriweather", serif;
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 0;
+    font-style: italic;
+}
+    </style>
+  </head>
+  <script>
+  function ajustarVH() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
+  ajustarVH();
+  window.addEventListener('resize', ajustarVH);
+</script>
+
+  <body class="main-layout">
+     
+    <!-- Header unificado -->
+    <header id="siteHeader" class="site-header" role="banner">
+      <div class="container">
+        <div class="mast">
+          <div class="brand">
+            <a href="index.html" aria-label="Ir al inicio">
+              <img src="images/Logo EAM.png" alt="Enciclopedia de Animales Mexicanos — logotipo" loading="eager" decoding="async" fetchpriority="high"><!-- CAMBIA si tu archivo es logo-eam.png -->
+            </a>
+            <div>
+              <div class="title">Enciclopedia de Animales Mexicanos</div>
+              <div class="sub">Inicio</div>
+            </div>
+          </div>
+          <nav class="nav" aria-label="Navegación principal">
+            <a href="index.html">Inicio</a>
+            <a href="about.html" aria-current="page" class="active">Nosotros</a>
+            <a href="contact.html">Contacto</a>
+            <a href="humanidad-animalidad.html">Animalidad y Humanidad</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+        <!-- ===== Buscador ===== -->
+        <div class="site-search" role="search">
+          <label class="cv-search header-search" for="headerQ" title="Buscar en el sitio">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="#64748b" stroke-width="2" stroke-linecap="round"/><circle cx="10.5" cy="10.5" r="6.5" stroke="#64748b" stroke-width="2"/></svg>
+            <input id="headerQ" placeholder="Busca secciones, fichas y convocatorias…" autocomplete="off" />
+            <span class="cv-kbd" aria-hidden="true">/</span>
+          </label>
+
+          <!-- Panel resultados -->
+          <div id="searchPanel" class="search-panel" aria-live="polite">
+            <div class="sp-header">
+              <strong id="spCount">Escribe para buscar</strong>
+              <button id="spClose" type="button" aria-label="Cerrar">✕</button>
+            </div>
+            <div id="spList" class="sp-list" role="list"></div>
+            <div id="spFooter" class="sp-footer" hidden>
+              <a href="#convocatorias" id="spSeeAll">Ver todos en Convocatorias</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== Banner ===== -->
+   <section class="banner_main" id="banner">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" aria-label="Mensajes principales">
+
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner">
+
+      <div class="carousel-item active">
+        <img src="images/banner 2aj.png" class="carousel-img" alt="Enciclopedia de Animales Mexicanos">
+        <div class="carousel-caption">
+          <span>Descubre nuestra fauna</span>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="images/Logo EAM.png" class="carousel-img" alt="Fichas verificadas" style="object-fit: contain; padding: 20px;">
+        <div class="carousel-caption">
+          <h1>Conocimiento Verificado</h1>
+          <span>Ciencia y cultura al alcance de todos</span>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="images/AJ1.jpg" class="carousel-img" alt="Colabora con la EAM">
+        <div class="carousel-caption">
+          <h1>Colabora con la EAM</h1>
+          <span>Manaus - Amazonas. Foto de Sobesi, Octubre, 2024</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Controles -->
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev" aria-label="Anterior">
+      <i class="fa fa-angle-left" aria-hidden="true"></i>
+      <span class="sr-only">Anterior</span>
+    </a>
+
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next" aria-label="Siguiente">
+      <i class="fa fa-angle-right" aria-hidden="true"></i>
+      <span class="sr-only">Siguiente</span>
+    </a>
+
+  </div>
+</section>
+<div class="div-icon">
+  <i class="fa fa-paw" aria-hidden="true"></i>
+</div>
+
+<div id="about" class="about_section layout_padding">
+  <div class="container">
+    <div class="row align-items-center">
+      
+      <div class="col-md-7">
+        <div class="titlepage">
+          <h2>Enfoque <span class="green">Etnohistórico</span></h2>
+        </div>
+        <div class="about_text longform">
+          <p>
+            La <strong>Enciclopedia de los Animales Mexicanos</strong> concentra de un modo sistemático y ordenado la información científica, etnohistórica, geográfica y ambiental de la fauna endémica en las diferentes bio-regiones del país.
+          </p>
+          <p>
+            La particularidad de la demarcación endémica de esta enciclopedia es de carácter etnohistórico, antropológico y cultural; busca recorrer los modos de <em>co-existencia e inclusión significativa</em> de la vida animal en el horizonte de la vida humana y sus representaciones míticas e iconográficas, centralmente en Mesoamérica, pero buscando continuamente el contraste entre horizontes culturales diversos.
+          </p>
+          <a class="read_more" href="about.html">Leer más sobre nosotros</a>
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="about_img">
+          <figure>
+            <img src="images/jaguar-859412_1280.jpg" alt="Iconografía y fauna" loading="lazy">
+          </figure>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+    <div class="py-5"></div>
+    
+<div class="impact-section">
+  <div class="container">
+    <div class="row text-center">
+      
+      <div class="col-md-4 col-sm-12 mb-4 mb-md-0">
+        <div class="impact-box">
+          <i class="fa fa-paw impact-icon" aria-hidden="true"></i>
+          <span class="impact-number counter"></span>
+          <p class="impact-text">Especies Documentadas</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-12 mb-4 mb-md-0">
+        <div class="impact-box border-side">
+          <i class="fa fa-book impact-icon" aria-hidden="true"></i>
+          <span class="impact-number counter"></span>
+          <p class="impact-text">Ensayos Etnohistóricos</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-12">
+        <div class="impact-box">
+          <i class="fa fa-users impact-icon" aria-hidden="true"></i>
+          <span class="impact-number counter"></span>
+          <p class="impact-text">Colaboracion Interdisicplianr</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="py-5"></div>
+<section class="convocatorias-section" id="convocatorias">
+  <div class="container">
+    
+    <div class="section-header-modern mb-4">
+      <div class="row align-items-center">
+        
+        <div class="col-lg-6 col-md-12 mb-3 mb-lg-0">
+          <div class="titlepage text-left">
+            <h2 id="convocatorias-titulo">FICHAS <span class="green">EAM</span></h2>
+            <p class="mb-0">Acervo digital de especies, ensayos y recursos.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+          <div class="cv-toolbar justify-content-lg-end justify-content-start">
+            
+            <span id="cvCount" class="result-badge" aria-live="polite">Cargando...</span>
+
+            <div class="cv-select-wrapper">
+              <select id="cvSort" class="cv-select" aria-label="Ordenar resultados">
+                <option value="fecha-desc">📅 Recientes</option>
+                <option value="fecha-asc">📅 Antiguas</option>
+                <option value="az">🔤 Nombre (A–Z)</option>
+              </select>
+            </div>
+
+            <button id="cvClearBtn" class="cv-btn-icon" type="button" title="Limpiar filtros">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-12">
+          <div id="cvChipBar" class="cv-chips-area">
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="cvGrid" class="pdf-grid" aria-live="polite">
+      
+
+          <article class="pdf-item" data-name="Vaca" data-tags="Vaca, 2025, Mamiferos" data-date="2025-06-01">
+            <div class="preview">
+              <embed class="pdf-embed lazy-embed" title="Vaca" data-src="VACA .pdf#view=FitH" type="application/pdf" />
+              <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
+            </div>
+            <div class="pdf-meta">
+              <div class="pdf-name">Vaca.pdf</div>
+              <div class="tag-row"><span class="badge-tag">Biótica</span><span class="badge-tag">Mamíferos</span></div>
+              <div class="actions">
+                <a href="#" class="btn-primary-action js-open-pdf" data-pdf="VACA .pdf" data-title="Vaca">Ver</a>
+                <a class="btn-secondary-action" href="VACA .pdf" download>Descargar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pdf-item" data-name="Monarca" data-tags="Monarca, 2025, Insectos" data-date="2025-06-01">
+            <div class="preview">
+              <embed class="pdf-embed lazy-embed" title="Mariposa Monarca" data-src="MONARCA. ETNOHISTÓRICA.pdf#view=FitH" type="application/pdf" />
+              <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
+            </div>
+            <div class="pdf-meta">
+              <div class="pdf-name">Mariposa Monarca</div>
+              <div class="tag-row"><span class="badge-tag">Etnohistórica</span><span class="badge-tag">Insectos</span></div>
+              <div class="actions">
+                <a href="#" class="btn-primary-action js-open-pdf" data-pdf="MONARCA. ETNOHISTÓRICA.pdf" data-title="Mariposa Monarca">Ver</a>
+                <a class="btn-secondary-action" href="MONARCA. ETNOHISTÓRICA.pdf" download>Descargar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pdf-item" data-name="Ajolote" data-tags="Ajolote, 2025, anfibios" data-date="2025-06-01">
+            <div class="preview">
+              <embed class="pdf-embed lazy-embed" title="Ajolote" data-src="AJOLOTE. BIÓTICA. SUSTITUIR.pdf#view=FitH" type="application/pdf" />
+              <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
+            </div>
+            <div class="pdf-meta">
+              <div class="pdf-name">El Axolote</div>
+              <div class="tag-row"><span class="badge-tag">Biótica</span><span class="badge-tag">Anfibios</span></div>
+              <div class="actions">
+                <a href="#" class="btn-primary-action js-open-pdf" data-pdf="AJOLOTE. BIÓTICA. SUSTITUIR.pdf" data-title="El Axolote">Ver</a>
+                <a class="btn-secondary-action" href="AJOLOTE. BIÓTICA. SUSTITUIR.pdf" download>Descargar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pdf-item" data-name="Cuervo" data-tags="Cuervo, 2025, Aves" data-date="2025-06-01">
+            <div class="preview">
+              <embed class="pdf-embed lazy-embed" title="Cuervo" data-src="CUERVO.BIÓTICA.pdf#view=FitH" type="application/pdf" />
+              <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
+            </div>
+            <div class="pdf-meta">
+              <div class="pdf-name">Cuervo</div>
+              <div class="tag-row"><span class="badge-tag">Biótica</span><span class="badge-tag">Aves</span></div>
+              <div class="actions">
+                <a href="#" class="btn-primary-action js-open-pdf" data-pdf="CUERVO.BIÓTICA.pdf" data-title="Cuervo">Ver</a>
+                <a class="btn-secondary-action" href="CUERVO.BIÓTICA.pdf" download>Descargar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pdf-item" data-name="Habitar nuestra animalidad" data-tags="Habitar, Animalidad, Filosofia, 2025" data-date="2025-06-01">
+            <div class="preview">
+              <embed class="pdf-embed lazy-embed" title="Habitar" data-src="HABITAR .pdf#view=FitH" type="application/pdf" />
+              <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
+            </div>
+            <div class="pdf-meta">
+              <div class="pdf-name">Habitar nuestra animalidad</div>
+              <div class="tag-row"><span class="badge-tag">Filosofía</span><span class="badge-tag">Ensayo</span></div>
+              <div class="actions">
+                <a href="#" class="btn-primary-action js-open-pdf" data-pdf="HABITAR .pdf" data-title="Habitar nuestra animalidad">Ver</a>
+                <a class="btn-secondary-action" href="HABITAR .pdf" download>Descargar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pdf-item" data-name="George Stubbs" data-tags="Arte, 2025, Caballos" data-date="2025-06-01">
+            <div class="preview">
+              <embed class="pdf-embed lazy-embed" title="George Stubbs" data-src="GEORGE STUBBS .pdf#view=FitH" type="application/pdf" />
+              <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
+            </div>
+            <div class="pdf-meta">
+              <div class="pdf-name">George Stubbs</div>
+              <div class="tag-row"><span class="badge-tag">Arte</span><span class="badge-tag">Caballos</span></div>
+              <div class="actions">
+                <a href="#" class="btn-primary-action js-open-pdf" data-pdf="GEORGE STUBBS .pdf" data-title="George Stubbs">Ver</a>
+                <a class="btn-secondary-action" href="GEORGE STUBBS .pdf" download>Descargar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pdf-item" data-name="Esceptisismo" data-tags="Filosofia, 2025, Animalidad" data-date="2025-06-01">
+            <div class="preview">
+              <embed class="pdf-embed lazy-embed" title="Esceptisismo" data-src="ESCEPTISISMO .pdf#view=FitH" type="application/pdf" />
+              <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
+            </div>
+            <div class="pdf-meta">
+              <div class="pdf-name">Escepticismo</div>
+              <div class="tag-row"><span class="badge-tag">Filosofía</span><span class="badge-tag">Animalidad</span></div>
+              <div class="actions">
+                <a href="#" class="btn-primary-action js-open-pdf" data-pdf="ESCEPTISISMO .pdf" data-title="Escepticismo">Ver</a>
+                <a class="btn-secondary-action" href="ESCEPTISISMO .pdf" download>Descargar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pdf-item" data-name="Coyote" data-tags="Mamifero, 2025, Biotica" data-date="2025-06-01">
+            <div class="preview">
+              <embed class="pdf-embed lazy-embed" title="Coyote" data-src="coyote.pdf#view=FitH" type="application/pdf" />
+              <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
+            </div>
+            <div class="pdf-meta">
+              <div class="pdf-name">Coyote</div>
+              <div class="tag-row"><span class="badge-tag">Mamíferos</span><span class="badge-tag">Biótica</span></div>
+              <div class="actions">
+                <a href="#" class="btn-primary-action js-open-pdf" data-pdf="coyote.pdf" data-title="Coyote">Ver</a>
+                <a class="btn-secondary-action" href="coyote.pdf" download>Descargar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pdf-item" data-name="Burro" data-tags="Biologia, 2025, Mamifero" data-date="2025-06-01">
+            <div class="preview">
+              <embed class="pdf-embed lazy-embed" title="Burro" data-src="BURRO .pdf#view=FitH" type="application/pdf" />
+              <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
+            </div>
+            <div class="pdf-meta">
+              <div class="pdf-name">Burro</div>
+              <div class="tag-row"><span class="badge-tag">Biología</span><span class="badge-tag">Mamíferos</span></div>
+              <div class="actions">
+                <a href="#" class="btn-primary-action js-open-pdf" data-pdf="BURRO .pdf" data-title="Burro">Ver</a>
+                <a class="btn-secondary-action" href="BURRO .pdf" download>Descargar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pdf-item" data-name="Asombro Compasión" data-tags="filosofia, 2025, Asombro" data-date="2025-06-01">
+            <div class="preview">
+              <embed class="pdf-embed lazy-embed" title="Asombro Compasión" data-src="ASOMBRO COMPASION .pdf#view=FitH" type="application/pdf" />
+              <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
+            </div>
+            <div class="pdf-meta">
+              <div class="pdf-name">Asombro Compasión</div>
+              <div class="tag-row"><span class="badge-tag">Filosofía</span><span class="badge-tag">Animalidad</span></div>
+              <div class="actions">
+                <a href="#" class="btn-primary-action js-open-pdf" data-pdf="ASOMBRO COMPASION .pdf" data-title="Asombro Compasión">Ver</a>
+                <a class="btn-secondary-action" href="ASOMBRO COMPASION .pdf" download>Descargar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pdf-item" data-name="Colibrí" data-tags="Aves, Colibri, Mexico" data-date="2025-04-10">
+            <div class="preview">
+              <embed class="pdf-embed lazy-embed" title="Colibrí" data-src="COLIBRÍ pdf.pdf#view=FitH" type="application/pdf" />
+              <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
+            </div>
+            <div class="pdf-meta">
+              <div class="pdf-name">Colibrí</div>
+              <div class="tag-row"><span class="badge-tag">Aves</span><span class="badge-tag">México</span></div>
+              <div class="actions">
+                <a href="#" class="btn-primary-action js-open-pdf" data-pdf="COLIBRÍ pdf.pdf" data-title="Colibrí">Ver</a>
+                <a class="btn-secondary-action" href="COLIBRÍ pdf.pdf" download>Descargar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pdf-item" data-name="Lobo" data-tags="Lobo, Biotica, Mamiferos" data-date="2025-04-10">
+            <div class="preview">
+              <embed class="pdf-embed lazy-embed" title="Lobo" data-src="LOBO BIÓTICA.pdf#view=FitH" type="application/pdf" />
+              <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
+            </div>
+            <div class="pdf-meta">
+              <div class="pdf-name">Lobo</div>
+              <div class="tag-row"><span class="badge-tag">Mamíferos</span><span class="badge-tag">Biótica</span></div>
+              <div class="actions">
+                <a href="#" class="btn-primary-action js-open-pdf" data-pdf="LOBO BIÓTICA.pdf" data-title="Lobo">Ver</a>
+                <a class="btn-secondary-action" href="LOBO BIÓTICA.pdf" download>Descargar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pdf-item" data-name="Ambystoma" data-tags="Ajolote, Ambystoma, anfibios" data-date="2025-06-01">
+            <div class="preview">
+              <embed class="pdf-embed lazy-embed" title="Ambystoma" data-src="AMBYSTOMA DESCARGABLE.pdf#view=FitH" type="application/pdf" />
+              <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
+            </div>
+            <div class="pdf-meta">
+              <div class="pdf-name">Ambystoma (Descargable)</div>
+              <div class="tag-row"><span class="badge-tag">Biótica</span><span class="badge-tag">Anfibios</span></div>
+              <div class="actions">
+                <a href="#" class="btn-primary-action js-open-pdf" data-pdf="AMBYSTOMA DESCARGABLE.pdf" data-title="Ambystoma">Ver</a>
+                <a class="btn-secondary-action" href="AMBYSTOMA DESCARGABLE.pdf" download>Descargar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="pdf-item" data-name="Xoloitzcuintli" data-tags="Mamiferos, Mexico, Xoloitzcuintli" data-date="2025-04-10">
+            <div class="preview">
+              <embed class="pdf-embed lazy-embed" title="Xoloitzcuintli" data-src="XOLOITZCUINTLI.pdf#view=FitH" type="application/pdf" />
+              <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
+            </div>
+            <div class="pdf-meta">
+              <div class="pdf-name">Xoloitzcuintli</div>
+              <div class="tag-row"><span class="badge-tag">Caninos</span><span class="badge-tag">Divulgación</span><span class="badge-tag">México</span></div>
+              <div class="actions">
+                <a href="#" class="btn-primary-action js-open-pdf" data-pdf="XOLOITZCUINTLI.pdf" data-title="Xoloitzcuintli">Ver</a>
+                <a class="btn-secondary-action" href="XOLOITZCUINTLI.pdf" download>Descargar</a>
+              </div>
+            </div>
+          </article>
+
+        </div> <div id="cvEmpty" class="cv-empty">
+           <i class="fa fa-search" style="font-size: 2rem; margin-bottom: 10px; opacity: 0.5;"></i><br>
+           Sin resultados. Ajusta la búsqueda o quita filtros.
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== Fichas ===== -->
+    <div id="testimonial" class="Testimonial">
+      <div class="container-fluid">
+        <div class="row d_flex">
+          <div class="col-md-8 pad_left0">
+            <div id="testimon" class="carousel slide banner_testimonial" data-ride="carousel" aria-label="Fichas destacadas">
+              <ol class="carousel-indicators">
+                <li data-target="#testimon" data-slide-to="0" class="active"></li>
+                <li data-target="#testimon" data-slide-to="1"></li>
+                <li data-target="#testimon" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="container">
+                    <div class="carousel-caption relative">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="text_humai" id="ficha-ajolote">
+                            <i><img src="images/ajol2.jpg" alt="Ajolote" loading="lazy" decoding="async"/></i>
+                            <span>Ajolote, Imagen de Ajolote, Axolotl y Humedal.
+Joaquín Enríquez, 2021
+</span>
+                            <p>Ambystoma mexicanum — Especie endémica; indicador de salud de ecosistemas acuáticos.</p>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="text_humai" id="ficha-colibri">
+                            <i><img src="images/c1.jpg" alt="Colibrí" loading="lazy" decoding="async"/></i>
+                            <span>Colibrí, Imagen de Colibrí, Pájaro y Hermosas flores.fprose, 2020</span>
+                            <p>Importante polinizador; diversidad alta en México.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="carousel-item">
+                  <div class="container">
+                    <div class="carousel-caption relative">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="text_humai" id="ficha-jaguar">
+                            <i><img src="images/AJ1.jpg" alt="Jaguar" loading="lazy" decoding="async"/></i>
+                            <span>Jaguar, Manaus- Amazonas.
+Foto de Sobesi, Octubre, 2024
+</span>
+                            <p>Panthera onca — Felino emblemático; conservación en corredores biológicos.</p>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="text_humai" id="ficha-perrito-pradera">
+                            <i><img src="images/p de p.jpg" alt="Perrito de la pradera" loading="lazy" decoding="async"/></i>
+                            <span>Perrito de la pradera, Imagen de Pradera, Perrito de las praderas y Especies.Medgyesi Jenő, 2022.</span>
+                            <p>Cynomys mexicanus — Ingeniero del ecosistema en pastizales.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="carousel-item">
+                  <div class="container">
+                    <div class="carousel-caption relative">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="text_humai" id="ficha-vaquita-marina">
+                            <i><img src="images/vm.jpg" alt="Vaquita marina" loading="lazy" decoding="async"/></i>
+                            <span>Vaquita marina, Vaquitas,  Thomas A. Jefferson, 2015.</span>
+                            <p>Phocoena sinus — En peligro crítico; esfuerzo internacional de conservación.</p>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="text_humai" id="ficha-tortuga-caguama">
+                            <i><img src="images/ttc.jpg" alt="Tortuga caguama" loading="lazy" decoding="async"/></i>
+                            <span>Tortuga caguama, Imagen de Tortuga marina, Tortuga verde y Tortuga marina gigante.
+bphelan, 2014.
+</span>
+                            <p>Caretta caretta — Migraciones largas; protección de playas de anidación.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <a class="carousel-control-prev" href="#testimon" role="button" data-slide="prev" aria-label="Anterior"><i class="fa fa-angle-left" aria-hidden="true"></i><span class="sr-only">Anterior</span></a>
+              <a class="carousel-control-next" href="#testimon" role="button" data-slide="next" aria-label="Siguiente"><i class="fa fa-angle-right" aria-hidden="true"></i><span class="sr-only">Siguiente</span></a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="titlepage">
+              <h2 id="fichas-titulo">Fichas</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Contacto ===== -->
+    <div id="contact" class="contact">
+      <div class="container">
+        <div class="row"><div class="col-md-12"><div class="titlepage"><h2 id="contacto-titulo">Contáctanos</h2></div></div></div>
+        <div class="row">
+          <div class="col-md-6">
+            <form action="#" method="post" id="request" class="main_form" novalidate>
+              <div class="row">
+                <div class="col-md-12"><label class="sr-only" for="name">Nombre</label><input id="name" class="contactus" placeholder="Nombre" type="text" name="name" required></div>
+                <div class="col-md-12"><label class="sr-only" for="email">Email</label><input id="email" class="contactus" placeholder="Email" type="email" name="email" required></div>
+                <div class="col-md-12"><label class="sr-only" for="phone">Teléfono</label><input id="phone" class="contactus" placeholder="Teléfono" type="tel" name="phone"></div>
+                <div class="col-md-12"><label class="sr-only" for="message">Mensaje</label><textarea id="message" class="textarea" placeholder="Mensaje" name="message" rows="5"></textarea></div>
+                <div class="col-md-12"><button class="send_btn" type="submit">Enviar</button></div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <div class="map_main">
+              <div class="map-responsive">
+                <iframe title="Mapa" src="https://www.google.com/maps?q=Xochimilco,+CDMX&output=embed" width="600" height="345" frameborder="0" style="border:0; width: 100%;" allowfullscreen loading="lazy"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Footer ===== -->
+    <footer>
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 col-sm-6">
+              <ul class="social_icon">
+                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+              </ul>
+              <p class="variat pad_roght2">Enciclopedia de los Animales Mexicanos es un proyecto de difusión del conocimiento zoológico, histórico y cultural, comprometido con la preservación y el estudio de la biodiversidad nacional.</p>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <h3>Contáctanos</h3>
+              <p class="variat pad_roght2">¿Dudas o colaboraciones? Escríbenos:<br>contacto@eam.org</p>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <h3>Enlaces útiles</h3>
+              <ul class="link_menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="nosotros.html">¿Quiénes somos?</a></li>
+                <li><a href="animales.html">Especies</a></li>
+                <li><a href="lineas-investigacion.html">Líneas de investigación</a></li>
+                <li><a href="colaboradores.html">Colaboradores</a></li>
+                <li><a href="contact.html">Contacto</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <h3>Nuestra visión</h3>
+              <p class="variat">Documentar y preservar el conocimiento etnohistórico y científico sobre la fauna de México, de forma abierta y verificable.</p>
+            </div>
+            <div class="col-md-6 offset-md-6">
+              <form id="newsletter" class="bottom_form" action="#" method="post">
+                <label class="sr-only" for="newsletter-email">Correo</label>
+                <input id="newsletter-email" class="enter" placeholder="Tu correo electrónico" type="email" name="email" required>
+                <button class="sub_btn" type="submit">Suscribirme</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <div class="container">
+            <div class="row"><div class="col-md-10 offset-md-1"><p>© 2025 Enciclopedia de los Animales Mexicanos. Todos los derechos reservados.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== Modal PDF ===== -->
+    <div class="modal fade" id="pdfModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen-md-down modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="pdfTitle" class="modal-title">Documento</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-0">
+            <embed id="pdfEmbed" type="application/pdf" src="" style="width:100%; height:80vh; border:0;" />
+          </div>
+          <div class="modal-footer">
+            <a id="pdfOpenNew" class="btn btn-outline-success" target="_blank" rel="noopener">Abrir en pestaña</a>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Volver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script defer src="js/jquery.min.js"></script>
+    <script defer src="js/bootstrap.bundle.min.js"></script>
+    <script defer src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script defer src="js/custom.js"></script>
+
+    <script>
+      // ===== Helper seguros (evitan conflicto con jQuery $) =====
+      const qs  = (q)=>document.querySelector(q);
+      const qsa = (q)=>Array.from(document.querySelectorAll(q));
+      const norm = s => (s||"").toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+
+      // Header sombra
+      (function(){
+        var h = document.getElementById('siteHeader');
+        function onScroll(){ if(!h) return; (window.scrollY>8)?h.classList.add('stuck'):h.classList.remove('stuck'); }
+        onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+      })();
+
+      // Reduced motion
+      (function(){
+        try{
+          var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (reduce) { ['myCarousel','testimon','design'].forEach(function(id){ 
+            var el=document.getElementById(id); 
+            if (el && window.jQuery && window.jQuery(el).carousel) window.jQuery(el).carousel({ interval:false, ride:false }); 
+          }); }
+        }catch(e){}
+      })();
+
+      // ===== RUTAS DIRECTAS POR PALABRA CLAVE =====
+      const KEY_ROUTES = [
+        { terms:['fichas','ficha','especies'], title:'Fichas', url:'#testimonial', type:'Sección', meta:'Fichas destacadas' },
+        { terms:['animalidad y humanidad','animalidad','humanidad'], title:'Animalidad y Humanidad', url:'humanidad-animalidad.html', type:'Sección', meta:'Sección' },
+        { terms:['filosofia','filosofía'], title:'Filosofía', url:'humanidad-animalidad.html#filosofia', type:'Sección', meta:'Humanidad' },
+        { terms:['literatura'], title:'Literatura', url:'humanidad-animalidad.html#literatura', type:'Sección', meta:'Humanidad' },
+        { terms:['artes','arte'], title:'Artes', url:'humanidad-animalidad.html#artes', type:'Sección', meta:'Humanidad' },
+        { terms:['juridicas','jurídicas','derecho'], title:'Jurídicas', url:'humanidad-animalidad.html#juridicas', type:'Sección', meta:'Humanidad' },
+        { terms:['arquitectura'], title:'Arquitectura', url:'humanidad-animalidad.html#arquitectura', type:'Sección', meta:'Humanidad' },
+      ];
+
+      // ===== CONVOCATORIAS (chips + filtro + lazy embed + modal) =====
+      (function(){
+        const headerQ = qs('#headerQ');
+        const sortSel = qs('#cvSort');
+        const clearBtn = qs('#cvClearBtn');
+        const chipBar = qs('#cvChipBar');
+        const count = qs('#cvCount');
+        const emptyEl = qs('#cvEmpty');
+        const grid = qs('#cvGrid');
+
+        const obs = ('IntersectionObserver' in window) ? new IntersectionObserver((entries,o)=>{
+          for(const e of entries){
+            if(e.isIntersecting){
+              const el = e.target; const src = el.getAttribute('data-src');
+              if(src){ el.setAttribute('src', src); el.removeAttribute('data-src'); }
+              o.unobserve(el);
+            }
+          }
+        }, {rootMargin:'200px'}) : null;
+
+        function hydrateLazy(){
+          qsa('.lazy-embed[data-src]').forEach(el=>{
+            if(obs) obs.observe(el);
+            else el.setAttribute('src', el.getAttribute('data-src'));
+          });
+        }
+
+        const selected = new Set();
+        function buildChips(){
+          const tagMap = new Map();
+          qsa('.pdf-item').forEach(it=>{
+            const tags = (it.getAttribute('data-tags')||'').split(',').map(t=>t.trim()).filter(Boolean);
+            for(const t of tags){ tagMap.set(t, (tagMap.get(t)||0)+1); }
+          });
+          chipBar.innerHTML='';
+          [...tagMap.keys()].sort((a,b)=>a.localeCompare(b,'es',{sensitivity:'base'})).forEach(tag=>{
+            const b=document.createElement('button'); b.type='button'; b.className='cv-chip'; b.textContent=tag; b.setAttribute('aria-pressed','false');
+            b.addEventListener('click', ()=>{
+              if(selected.has(tag)){ selected.delete(tag); b.classList.remove('active'); b.setAttribute('aria-pressed','false'); }
+              else { selected.add(tag); b.classList.add('active'); b.setAttribute('aria-pressed','true'); }
+              applyFilter();
+            });
+            chipBar.appendChild(b);
+          });
+        }
+
+        function sortItems(items){
+          const mode = sortSel ? sortSel.value : 'fecha-desc';
+          const byName = (a,b)=> norm(a.getAttribute('data-name')).localeCompare(norm(b.getAttribute('data-name')),'es');
+          const parseDate = (it)=>{
+            const name = it.getAttribute('data-name')||'';
+            const m = name.match(/\b(20\d{2}|19\d{2})\b/);
+            return m ? new Date(+m[1], 0, 1) : new Date(2100,0,1);
+          };
+          if(mode==='az') return items.sort(byName);
+          if(mode==='za') return items.sort((a,b)=>-byName(a,b));
+          if(mode==='fecha-asc') return items.sort((a,b)=> parseDate(a)-parseDate(b));
+          return items.sort((a,b)=> parseDate(b)-parseDate(a));
+        }
+
+        function applyFilter(){
+          const needle = norm(headerQ ? headerQ.value : '');
+          const items = qsa('.pdf-item');
+          let list = items.slice();
+
+          if(selected.size){
+            list = list.filter(it=>{
+              const raw = (it.getAttribute('data-tags')||'').split(',').map(s=>s.trim());
+              return [...selected].some(t => raw.includes(t));
+            });
+          }
+          if(needle){
+            list = list.filter(it=>{
+              const name = norm(it.getAttribute('data-name'));
+              const tags = norm(it.getAttribute('data-tags')||'');
+              return name.includes(needle) || tags.includes(needle);
+            });
+          }
+
+          const setHidden = new Set(list);
+          items.forEach(it=> it.classList.toggle('hide', !setHidden.has(it)));
+          sortItems(list).forEach(el=> grid.appendChild(el));
+
+          const visible = list.length;
+          if(count) count.textContent = `${visible} resultado${visible===1?'':'s'}`;
+          if(emptyEl) emptyEl.style.display = visible ? 'none' : 'block';
+
+          hydrateLazy();
+        }
+
+        function debounce(fn, ms){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms);} }
+
+        if(headerQ) headerQ.addEventListener('input', debounce(applyFilter,120));
+        if(sortSel) sortSel.addEventListener('change', applyFilter);
+        if(clearBtn) clearBtn.addEventListener('click', ()=>{
+          if(headerQ) headerQ.value='';
+          selected.clear();
+          qsa('.cv-chip.active').forEach(c=>{ c.classList.remove('active'); c.setAttribute('aria-pressed','false'); });
+          applyFilter();
+          if(headerQ) headerQ.focus();
+        });
+        window.addEventListener('keydown', (e)=>{
+          if(e.key==='/' && document.activeElement!==headerQ){ e.preventDefault(); if(headerQ) headerQ.focus(); }
+          if(e.key==='Escape'){ if(clearBtn) clearBtn.click(); }
+        });
+
+        // Modal PDF (usar jQuery explícito para evitar choque con helpers)
+        const modalEl = document.getElementById('pdfModal');
+        const pdfTitle = document.getElementById('pdfTitle');
+        const pdfEmbed = document.getElementById('pdfEmbed');
+        const pdfOpenNew = document.getElementById('pdfOpenNew');
+
+        function openPdf(url, title){
+          pdfTitle.textContent = title || 'Documento';
+          pdfEmbed.setAttribute('src', url + '#view=FitH');
+          pdfOpenNew.setAttribute('href', url);
+          if (window.jQuery && window.jQuery(modalEl).modal) { window.jQuery(modalEl).modal('show'); }
+        }
+        if (modalEl && window.jQuery){
+          window.jQuery(modalEl).on('hidden.bs.modal', function(){ pdfEmbed.removeAttribute('src'); });
+        }
+        qsa('.js-open-pdf').forEach(btn=>{
+          btn.addEventListener('click', (e)=>{
+            e.preventDefault();
+            const url = btn.getAttribute('data-pdf');
+            const title = btn.getAttribute('data-title') || btn.textContent.trim();
+            if(url) openPdf(url, title);
+          });
+        });
+
+        window.filterConvocatorias = function(term){
+          const header = qs('#headerQ');
+          if(header){ header.value = term || ''; }
+          applyFilter();
+        };
+
+        buildChips();
+        applyFilter();
+        hydrateLazy();
+      })();
+
+      // ===== BUSCADOR DEL HEADER (panel + rutas + teclado) =====
+      (function(){
+        const headerQ = qs('#headerQ');
+        const panel   = qs('#searchPanel');
+        const spList  = qs('#spList');
+        const spCount = qs('#spCount');
+        const spClose = qs('#spClose');
+        const spFooter= qs('#spFooter');
+        const spSeeAll= qs('#spSeeAll');
+
+        function highlight(text, q){
+          const n = norm(text), m = norm(q);
+          if(!m) return text;
+          const i = n.indexOf(m);
+          if(i<0) return text;
+          return text.substring(0,i) + '<span class="hl">' + text.substring(i, i+m.length) + '</span>' + text.substring(i+m.length);
+        }
+
+        function applyConvFilter(term){
+          if (typeof window.filterConvocatorias === 'function'){
+            window.filterConvocatorias(term || '');
+          }
+        }
+
+        const index = [];
+        function buildIndex(){
+          index.length = 0;
+
+          // Rutas clave sugeridas
+          KEY_ROUTES.forEach(r=>{
+            index.push({ type:r.type, title:r.title, url:r.url, meta:r.meta||'', tags:[], __route: true, terms:r.terms });
+          });
+
+          // Menú principal
+          qsa('header nav a').forEach(a=>{
+            index.push({
+              type:'Sección',
+              title:a.textContent.trim(),
+              url:a.getAttribute('href')||'#',
+              meta:'Navegación',
+              tags:[]
+            });
+          });
+
+          // Convocatorias (tarjetas)
+          qsa('#cvGrid .pdf-item').forEach(card=>{
+            const name = card.getAttribute('data-name') || (card.querySelector('.pdf-name') ? card.querySelector('.pdf-name').textContent : 'Documento');
+            const tagsRaw = (card.getAttribute('data-tags') || '').split(',').map(t=>t.trim()).filter(Boolean);
+            index.push({
+              type:'Convocatoria',
+              title:name,
+              url:'#convocatorias',
+              meta:tagsRaw.join(', '),
+              tags:tagsRaw
+            });
+          });
+
+          // Animales (galería y fichas)
+          qsa('#gallery .galleryh3 h3').forEach(h=>{
+            index.push({ type:'Animal', title:h.textContent.trim(), url:'#gallery', meta:'Galería', tags:[] });
+          });
+          qsa('#testimonial .text_humai span').forEach(s=>{
+            const cont = s.closest('.text_humai');
+            const id = cont && cont.id ? cont.id : 'testimonial';
+            index.push({ type:'Animal', title:s.textContent.trim(), url:'#'+id, meta:'Fichas', tags:[] });
+          });
+
+          // Títulos de secciones (h2 con id)
+          const anchorTargets = [
+            '#sobre-la-enciclopedia',
+            '#nuestros-contenidos',
+            '#nuestra-galeria',
+            '#lineas-investigacion',
+            '#divulgacion-cientifica',
+            '#datos-abiertos',
+            '#avances-titulo',
+            '#convocatorias-titulo',
+            '#fichas-titulo',
+            '#contacto-titulo'
+          ];
+          qsa(anchorTargets.join(',')).forEach(el=>{
+            const id = el.getAttribute('id');
+            const text = el.textContent.trim();
+            if(id && text){
+              index.push({ type:'Sección', title:text, url:'#'+id, meta:'Sección', tags:[] });
+            }
+          });
+
+          // Avances específicos (news_box con id -> usar su h3 como título)
+          qsa('.latest_news .news_box[id]').forEach(box=>{
+            const id = box.id;
+            const h3 = box.querySelector('h3');
+            if(id && h3){
+              index.push({ type:'Avance', title:h3.textContent.trim(), url:'#'+id, meta:'Avances', tags:[] });
+            }
+          });
+        }
+        buildIndex();
+
+        function bestKeyRoute(q){
+          const m = norm(q);
+          if(!m) return null;
+          for(const r of KEY_ROUTES){
+            if(r.terms.some(t => norm(t).startsWith(m) || m.includes(norm(t)) )){
+              return r;
+            }
+          }
+          return null;
+        }
+
+        function search(q){
+          const needle = norm(q);
+          if(!needle) return [];
+
+          const scored = index.map(it=>{
+            const hay = norm(it.title + ' ' + (it.meta||'') + ' ' + (it.tags||[]).join(' '));
+            let score = 0;
+            if(hay.includes(needle)) score += 10;
+            if(norm(it.title).startsWith(needle)) score += 6;
+            if(it.__route && hay.includes(needle)) score += 12;
+            if(it.type==='Convocatoria' && hay.includes(needle)) score += 2;
+            if(it.type==='Avance' && hay.includes(needle)) score += 2;
+            return {item:it, score};
+          }).filter(x=>x.score>0);
+
+          scored.sort((a,b)=> b.score - a.score || a.item.title.localeCompare(b.item.title,'es'));
+          return scored.map(x=>x.item);
+        }
+
+        function convocatoriaMatches(term){
+          const needle = norm(term);
+          const items = qsa('#cvGrid .pdf-item');
+          const out = [];
+          items.forEach(it=>{
+            const name = norm(it.getAttribute('data-name'));
+            const tags = norm(it.getAttribute('data-tags')||'');
+            if(!needle || name.includes(needle) || tags.includes(needle)){
+              out.push({ title: it.getAttribute('data-name') || 'Documento', meta:  it.getAttribute('data-tags') || '' });
+            }
+          });
+          return out;
+        }
+
+        function iconFor(type){
+          if(type==='Sección') return '<i class="fa fa-compass sp-ico" aria-hidden="true"></i>';
+          if(type==='Convocatoria') return '<i class="fa fa-file-pdf-o sp-ico" aria-hidden="true"></i>';
+          if(type==='Avance') return '<i class="fa fa-flask sp-ico" aria-hidden="true"></i>';
+          return '<i class="fa fa-paw sp-ico" aria-hidden="true"></i>';
+        }
+
+        let activeIndex = -1;
+
+        function renderPanel(term){
+          const q = term || '';
+          const key = bestKeyRoute(q);
+          const results = q ? search(q) : [];
+          const convos  = q ? convocatoriaMatches(q) : [];
+          const top = (key && !results.some(r=>r.url===key.url))
+            ? [ {type:key.type,title:key.title,url:key.url,meta:key.meta||'',tags:[], __route:true} , ...results].slice(0,12)
+            : results.slice(0,12);
+
+          spCount.textContent = q ? `${results.length} resultado${results.length===1?'':'s'}` : 'Escribe para buscar';
+
+          if (q && top.length === 0){
+            spList.innerHTML = `
+              <div class="sp-item" role="listitem" style="cursor:default">
+                <div class="sp-ico"></div>
+                <div class="sp-main">
+                  <div class="sp-title">Sin resultados</div>
+                  <div class="sp-meta">Prueba con otro término o pulsa Enter para ver convocatorias filtradas</div>
+                </div>
+              </div>`;
+          } else {
+            spList.innerHTML = top.map((it,i)=>{
+              const chips = (it.type==='Convocatoria' && it.tags && it.tags.length)
+                ? `<div class="sp-tags">${it.tags.slice(0,4).map(t=>`<span class="sp-chip">${t}</span>`).join('')}</div>`
+                : '';
+              const titleHL = highlight(it.title, q);
+              const metaHL  = highlight(it.meta||'', q);
+              return `
+                <div class="sp-item" role="listitem" data-i="${i}">
+                  ${iconFor(it.type)}
+                  <div class="sp-main">
+                    <div><span class="sp-type">${it.type}</span> <span class="sp-title" title="${it.title}">${titleHL}</span></div>
+                    <div class="sp-meta">${metaHL}</div>
+                    ${chips}
+                  </div>
+                </div>`;
+            }).join('');
+          }
+
+          if (q && convos.length){
+            spFooter.hidden = false;
+            spSeeAll.onclick = (e)=>{ e.preventDefault(); applyConvFilter(q); location.hash = '#convocatorias'; hidePanel(); };
+            spSeeAll.textContent = `Ver ${convos.length} en Convocatorias`;
+          } else {
+            spFooter.hidden = true;
+          }
+
+          qsa('.sp-item[data-i]').forEach(row=>{
+            row.addEventListener('click', ()=>{
+              const i = +row.getAttribute('data-i');
+              const it = top[i];
+              if(!it) return;
+              if(it.type === 'Convocatoria'){ applyConvFilter(q || it.title); location.hash = '#convocatorias'; }
+              else if(it.url){ location.href = it.url; }
+              hidePanel();
+            });
+          });
+
+          activeIndex = -1;
+          if(q.length>=1){ showPanel(); } else { hidePanel(); }
+        }
+
+        function showPanel(){ panel.style.display='block'; }
+        function hidePanel(){ panel.style.display='none'; }
+
+        function moveSelection(dir){
+          const rows = Array.from(spList.querySelectorAll('.sp-item[data-i]'));
+          if(!rows.length) return;
+          activeIndex += dir;
+          if(activeIndex < 0) activeIndex = rows.length - 1;
+          if(activeIndex >= rows.length) activeIndex = 0;
+          rows.forEach(r=>r.classList.remove('active'));
+          const active = rows[activeIndex];
+          active.classList.add('active');
+          active.scrollIntoView({ block:'nearest' });
+        }
+        function activateSelection(q){
+          const rows = Array.from(spList.querySelectorAll('.sp-item[data-i]'));
+          if(rows.length && activeIndex>=0){
+            rows[activeIndex].click();
+            return;
+          }
+          const key = bestKeyRoute(q);
+          if(key){ location.href = key.url; hidePanel(); return; }
+          if(q && typeof window.filterConvocatorias === 'function'){
+            window.filterConvocatorias(q); location.hash = '#convocatorias'; hidePanel();
+          }
+        }
+
+        if(headerQ){
+          const deb = (fn,ms)=>{ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a),ms);} };
+          headerQ.addEventListener('input', deb((e)=>{
+            const val = e.target.value;
+            applyConvFilter(val);
+            renderPanel(val);
+          }, 120));
+
+          headerQ.addEventListener('keydown', (e)=>{
+            if(e.key==='Enter'){ e.preventDefault(); activateSelection(headerQ.value.trim()); }
+            else if(e.key==='ArrowDown'){ e.preventDefault(); moveSelection(1); }
+            else if(e.key==='ArrowUp'){ e.preventDefault(); moveSelection(-1); }
+            else if(e.key==='Escape'){ hidePanel(); }
+          });
+
+          headerQ.addEventListener('focus', ()=>{
+            if(headerQ.value && headerQ.value.length>=1){ showPanel(); }
+          });
+        }
+
+        if(spClose) spClose.addEventListener('click', hidePanel);
+        document.addEventListener('click', (ev)=>{
+          const within = panel.contains(ev.target) || (ev.target===headerQ) || (headerQ && headerQ.contains(ev.target));
+          if(!within) hidePanel();
+        });
+
+        // Atajo global "/"
+        document.addEventListener('keydown', (e)=>{
+          const t = document.activeElement && document.activeElement.tagName;
+          if(e.key==='/' && document.activeElement!==headerQ && t!=='INPUT' && t!=='TEXTAREA'){
+            e.preventDefault();
+            if(headerQ) headerQ.focus();
+          }
+        });
+      })();
+      
+    </script>
+  </body>
+</html>
