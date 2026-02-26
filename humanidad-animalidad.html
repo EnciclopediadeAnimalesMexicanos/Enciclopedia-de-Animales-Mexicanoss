@@ -8,9 +8,7 @@
   <meta name="description" content="Repositorio de materiales sobre Animalidad y Humanidad: Jurídicas, Filosóficas y Arquitectónicas.">
   <meta name="author" content="Enciclopedia de Animales Mexicanos">
 
-  <!-- Bootstrap (CDN, un solo archivo) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Iconos mínimos -->
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 
   <style>
@@ -75,21 +73,53 @@
     .tag-row{ display:flex; flex-wrap:wrap; gap:.35rem }
     .badge-tag{ border:1px solid #bbf7d0; background:#ecfdf5; color:var(--accent); border-radius:999px; padding:.15rem .5rem; font-size:.8rem; }
     .actions{ display:flex; align-items:center; gap:.5rem; margin-top:.25rem }
-    .btn-linklike{ display:inline-flex; align-items:center; gap:.45rem; border:1px solid var(--line); padding:.45rem .75rem; border-radius:10px; background:#fff; text-decoration:none; color:var(--accent); font-weight:600; }
-    .btn-linklike:hover{ background:#f1fcf5; border-color:#cce3d3; }
+    
+    /* Estilos unificados de botones */
+    .btn-linklike, .btn-primary-action, .btn-secondary-action{ 
+      display:inline-flex; align-items:center; gap:.45rem; border:1px solid var(--line); padding:.45rem .75rem; border-radius:10px; background:#fff; text-decoration:none; color:var(--accent); font-weight:600; cursor:pointer; font-size: 0.9rem;
+    }
+    .btn-linklike:hover, .btn-secondary-action:hover{ background:#f1fcf5; border-color:#cce3d3; text-decoration:none; color:var(--accent); }
+    
+    /* Estilo destacado para el botón principal "Ver" */
+    .btn-primary-action {
+      background: var(--accent);
+      color: #fff !important;
+      border-color: var(--accent-600);
+    }
+    .btn-primary-action:hover {
+      background: var(--accent-600);
+      text-decoration:none;
+    }
+
     .cv-empty{display:none; border:1px dashed var(--line); border-radius:12px; padding:2rem; text-align:center; color:var(--muted); background:#fff; margin-top:1rem}
 
     /* Modal */
     .modal-content{border-radius:16px}
+    
+    /* Clase especial para centrar el elemento central en el grid */
+    .featured-pdf {
+        grid-column: 1 / -1; /* Ocupa todo el ancho en móvil */
+        margin-bottom: 1.5rem;
+    }
+    
+    @media (min-width: 768px) {
+        .featured-pdf {
+            grid-column: span 2; /* Ocupa dos columnas en desktop para destacar */
+            justify-self: center; /* Centra el elemento si el grid tiene espacio extra */
+            width: 100%;
+            max-width: 800px; /* Ancho máximo para que no se vea gigante */
+        }
+    }
   </style>
- <!-- Header unificado -->
-    <header id="siteHeader" class="site-header" role="banner">
+</head>
+<body>
+
+ <header id="siteHeader" class="site-header" role="banner">
       <div class="container">
         <div class="mast">
           <div class="brand">
             <a href="index.html" aria-label="Ir al inicio">
-              <img src="images/Logo EAM.png" alt="Enciclopedia de Animales Mexicanos — logotipo" loading="eager" decoding="async" fetchpriority="high"><!-- CAMBIA si tu archivo es logo-eam.png -->
-            </a>
+              <img src="images/Logo EAM.png" alt="Enciclopedia de Animales Mexicanos — logotipo" loading="eager" decoding="async" fetchpriority="high"></a>
             <div>
               <div class="title">Enciclopedia de Animales Mexicanos</div>
               <div class="sub">humanidad-animalidad</div>
@@ -104,7 +134,7 @@
         </div>
       </div>
     </header>
-  <!-- ===== Hero ===== -->
+
   <section class="repo-hero">
     <div class="container">
       <div class="row align-items-end">
@@ -119,7 +149,6 @@
     </div>
   </section>
 
-  <!-- ===== Explorador geográfico (continentes) ===== -->
   <section id="explorador-geo" class="py-3" aria-labelledby="explorador-title">
     <div class="container">
       <div class="d-flex justify-content-between align-items-end mb-2">
@@ -138,10 +167,8 @@
       </style>
 
       <div class="geo-wrap">
-        <!-- Coloca el archivo en 'images/mapa-continentes.png' o cambia la ruta -->
         <img class="geo-img" src="mapa-continentes.jpg" alt="Mapa con América, Europa, África, Asia y Oceanía" loading="lazy" decoding="async">
 
-        <!-- Hotspots aproximados por porcentajes (responsive) -->
         <a class="geo-hotspot" href="America.html" style="left:18%; top:46%" aria-label="América">América</a>
         <a class="geo-hotspot" href="Europa.html" style="left:52%; top:23%" aria-label="Europa">Europa</a>
         <a class="geo-hotspot" href="Africa.html" style="left:52%; top:48%" aria-label="África">África</a>
@@ -161,10 +188,9 @@
     </div>
   </section>
 
-  <!-- ===== Repositorio A/H ===== -->
   <section id="repositorio-ah" class="repo-section">
     <div class="container">
-      <div class="row align-items-end">
+      <div class="row align-items-end mb-4">
         <div class="col-md-8">
           <div class="titlepage">
             <h2>Repositorio <span class="green">A/H</span></h2>
@@ -183,7 +209,6 @@
               <span id="ahCount" class="text-muted small" aria-live="polite"></span>
             </div>
           </div>
-          <!-- Chips de categoría -->
           <div id="ahCats" class="cv-chips" aria-label="Filtrar por categoría">
             <button type="button" class="cv-chip" data-cat="all" aria-pressed="true">Todas</button>
             <button type="button" class="cv-chip" data-cat="juridicas" aria-pressed="false">Jurídicas</button>
@@ -193,11 +218,27 @@
         </div>
       </div>
 
-      <!-- Grid -->
       <div id="ahGrid" class="pdf-grid" aria-live="polite">
-        <!-- ====== EJEMPLOS: duplica estos <article> y cambia data-* y rutas ====== -->
+          
+        <article class="pdf-item featured-pdf" data-name="Animalidad-Humanidad" data-tags="Filosofia, 2026, revista" data-cat="filosoficas" data-date="2026-02-26">
+          <div class="preview">
+            <embed class="pdf-embed lazy-embed" title="Animalidad-Humanidad" data-src="Revista_de_Animalidad_3_compressed.pdf#view=FitH" type="application/pdf" />
+            <span class="hint"><i class="fa fa-eye"></i> Vista previa destacada</span>
+          </div>
+          <div class="pdf-meta">
+            <div class="pdf-name">Animalidad-Humanidad</div>
+            <div class="tag-row">
+              <span class="badge-tag">Filosofía</span>
+              <span class="badge-tag">Edición 2026</span>
+              <span class="badge-tag">Destacado</span>
+            </div>
+            <div class="actions">
+              <a href="#" class="btn-primary-action js-open-pdf" data-pdf="Revista_de_Animalidad_3_compressed.pdf" data-title="Animalidad-Humanidad">Ver documento</a>
+              <a class="btn-secondary-action" href="Revista_de_Animalidad_3_compressed.pdf" download>Descargar (PDF)</a>
+            </div>
+          </div>
+        </article>
 
-        <!-- Jurídicas -->
         <article class="pdf-item" data-name="Norma Bienestar 2025.pdf"
                  data-tags="normativa, bienestar, 2025"
                  data-cat="juridicas">
@@ -221,7 +262,6 @@
           </div>
         </article>
 
-        <!-- Filosóficas -->
         <article class="pdf-item" data-name="Cuervo.pdf"
                  data-tags="Biotica, ética, método"
                  data-cat="filosoficas">
@@ -244,25 +284,7 @@
             </div>
           </div>
         </article>
-</head>
-<body>
-<article class="pdf-item" data-name="Animalidad-Humanidad" data-tags="Filosofia, 2026" data-date="2026-02-26">
-  <div class="preview">
-    <embed class="pdf-embed lazy-embed" title="Animalidad-Humanidad" data-src="Revista_de_Animalidad_3_compressed.pdf#view=FitH" type="application/pdf" />
-    <span class="hint"><i class="fa fa-eye"></i> Vista previa</span>
-  </div>
-  <div class="pdf-meta">
-    <div class="pdf-name">Animalidad-Humanidad</div> <div class="tag-row">
-      <span class="badge-tag">Filosofía</span>
-      <span class="badge-tag">2026</span>
-    </div>
-    <div class="actions">
-      <a href="#" class="btn-primary-action js-open-pdf" data-pdf="Revista_de_Animalidad_3_compressed.pdf" data-title="Animalidad-Humanidad">Ver</a>
-      <a class="btn-secondary-action" href="Revista_de_Animalidad_3_compressed.pdf" download>Descargar</a>
-    </div>
-  </div>
-</article>
-        <!-- Arquitectónicas -->
+
         <article class="pdf-item" data-name="Plano Hábitat Centro Interpretación.pdf"
                  data-tags="diseño, refugios, museografía"
                  data-cat="arquitectonicas">
@@ -286,16 +308,14 @@
           </div>
         </article>
 
-        <!-- ====== /EJEMPLOS ====== -->
-      </div>
+        </div>
 
       <div id="ahEmpty" class="cv-empty">Sin resultados. Ajusta la búsqueda o quita filtros.</div>
     </div>
   </section>
 
-  <!-- ===== Secciones A / H / A (del Word) ===== -->
-  <section id="aha-secciones" class="py-4">
-    <div class="container">
+  <section id="aha-secciones" class="repo-section" style="background:#fff; border-top:1px solid var(--line);">
+    <div class="container py-4">
       <header class="mb-3">
         <h2 class="h4 mb-1">Animalidad – Humanidad – Ambiente</h2>
         <p class="text-muted mb-0">Estructura solicitada en el documento: cada disciplina con texto introductorio, una tira de imágenes y un bloque de dossiers que llevan a su página.</p>
@@ -309,7 +329,6 @@
         .aha-dossier a:hover{background:#f1fcf5; border-color:#cce3d3}
       </style>
 
-      <!-- ===== FILOSOFÍA ===== -->
       <article id="sec-filosofia" class="mb-5">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
           <h3 class="h5 mb-0">Filosofía</h3>
@@ -334,7 +353,6 @@
         </div>
       </article>
 
-      <!-- ===== HISTORIA ===== -->
       <article id="sec-historia" class="mb-5">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
           <h3 class="h5 mb-0">Historia</h3>
@@ -355,7 +373,6 @@
         </div>
       </article>
 
-      <!-- ===== LITERATURA ===== -->
       <article id="sec-literatura" class="mb-5">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
           <h3 class="h5 mb-0">Literatura</h3>
@@ -376,7 +393,6 @@
         </div>
       </article>
 
-      <!-- ===== ARTES ===== -->
       <article id="sec-artes" class="mb-5">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
           <h3 class="h5 mb-0">Artes</h3>
@@ -397,7 +413,6 @@
         </div>
       </article>
 
-      <!-- ===== JURÍDICA ===== -->
       <article id="sec-juridica" class="mb-5">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
           <h3 class="h5 mb-0">Jurídica</h3>
@@ -418,7 +433,6 @@
         </div>
       </article>
 
-      <!-- ===== URBANISMO Y ARQUITECTURA ===== -->
       <article id="sec-urbanismo" class="mb-4">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
           <h3 class="h5 mb-0">Urbanismo y Arquitectura</h3>
@@ -442,7 +456,6 @@
     </div>
   </section>
 
-  <!-- ===== Modal PDF (reutilizable) ===== -->
   <div class="modal fade" id="pdfModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-md-down modal-xl">
       <div class="modal-content">
@@ -463,7 +476,6 @@
     </div>
   </div>
 
-  <!-- ===== JS (CDN) ===== -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" defer></script>
 
